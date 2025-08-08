@@ -28,13 +28,14 @@ export function setupSwagger(app: Express) {
   app.use('/api-docs', express.static(swaggerDistPath));
 
   app.get('/api-docs', (_req, res) => {
-    const html = fs.readFileSync(path.join(swaggerDistPath, 'index.html'), 'utf8');
-    const customizedHtml = html.replace(
-      'https://petstore.swagger.io/v2/swagger.json',
-      '/swagger.json'
-    );
-    res.send(customizedHtml);
-  });
+  const html = fs.readFileSync(path.join(swaggerDistPath, 'index.html'), 'utf8');
+  const customizedHtml = html.replace(
+    'https://petstore.swagger.io/v2/swagger.json',
+    '/swagger.json'
+  );
+  res.send(customizedHtml);
+});
+
 
   app.get('/swagger.json', (_req, res) => {
     res.setHeader('Content-Type', 'application/json');
