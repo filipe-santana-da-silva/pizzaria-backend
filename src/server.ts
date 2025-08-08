@@ -5,6 +5,8 @@ import 'express-async-errors';
 import cors from 'cors'
 import path from 'path'
 
+import { setupSwagger } from './swagger/setupSwagger';
+
 import fileUpload from 'express-fileupload';
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(fileUpload({
 }))
 
 app.use(router);
+
+setupSwagger(app);
 
 app.use(
     '/files',

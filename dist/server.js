@@ -8,6 +8,7 @@ const route_1 = require("./route");
 require("express-async-errors");
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
+const setupSwagger_1 = require("./swagger/setupSwagger");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -16,6 +17,7 @@ app.use((0, express_fileupload_1.default)({
     limits: { fileSize: 50 * 1024 * 1024 }
 }));
 app.use(route_1.router);
+(0, setupSwagger_1.setupSwagger)(app);
 app.use('/files', express_1.default.static(path_1.default.resolve(__dirname, '..', 'temp')));
 app.use((err, req, res, next) => {
     if (err instanceof Error) {
